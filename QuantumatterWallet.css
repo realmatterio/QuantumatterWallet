@@ -1,0 +1,1181 @@
+/* Mobile-First iPhone Portrait Design */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* iPhone Viewport Container */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  background: #000;
+  color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+/* Default Portrait Mode - Full Screen */
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hide iPhone frame elements in portrait */
+.device-frame {
+  display: none;
+}
+
+.status-bar {
+  display: none;
+}
+
+.screen::before {
+  display: none;
+}
+
+/* Screen Area - Full screen in portrait */
+.screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Landscape Mode - iPhone Frame */
+@media screen and (orientation: landscape) {
+  body {
+    padding: 8px;
+  }
+  
+  .app-wrapper {
+    width: auto;
+    height: auto;
+    background: transparent;
+  }
+  
+  /* iPhone Device Frame - Only in Landscape */
+  .device-frame {
+    display: block;
+    width: 812px; /* iPhone Max landscape width */
+    height: 375px; /* iPhone Max landscape height */
+    max-width: calc(100vw - 16px);
+    max-height: calc(100vh - 16px);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 
+      0 0 0 8px #1a1a1a,
+      0 20px 60px rgba(0, 0, 0, 0.8),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Screen Area - Fitted in landscape */
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Dynamic Island / Notch - Only in Landscape */
+  .screen::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 30px;
+    background: #000;
+    border-radius: 15px;
+    z-index: 1000;
+    display: block;
+  }
+  
+  /* Status Bar - Only in Landscape */
+  .status-bar {
+    display: flex;
+    height: 44px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  .status-left {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .status-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+/* Page System */
+.page {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.page.active {
+  display: flex;
+}
+
+/* Scrollbar Styling */
+.page::-webkit-scrollbar {
+  width: 4px;
+}
+
+.page::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Top Action Buttons */
+.top-buttons {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Landscape - adjust top buttons position */
+@media screen and (orientation: landscape) {
+  .top-buttons {
+    top: 60px;
+  }
+}
+
+.round-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.round-btn:hover, .round-btn.active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Sections */
+.section {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Logo Container */
+.logo-container {
+  text-align: center;
+  margin: 80px 0 40px 0;
+}
+
+/* Portrait - reduce logo margin */
+@media screen and (orientation: portrait) {
+  .logo-container {
+    margin: 40px 0 20px 0;
+  }
+}
+
+/* Logo styling - set to 66% width */
+.logo {
+  max-width: 66%; /* Changed from 120px to 66% */
+  height: auto;
+  filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 8px 30px rgba(255, 255, 255, 0.3));
+}
+
+/* Enhanced Proof Status Icons */
+.proof-status-success {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 24px rgba(72, 187, 120, 0.4),
+    0 0 20px rgba(72, 187, 120, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+.proof-status-fail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 24px rgba(229, 62, 62, 0.4),
+    0 0 20px rgba(229, 62, 62, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  animation: failPulse 2s ease-in-out infinite;
+}
+
+/* Animations for status icons */
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 8px 24px rgba(72, 187, 120, 0.4),
+      0 0 20px rgba(72, 187, 120, 0.6);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 12px 32px rgba(72, 187, 120, 0.6),
+      0 0 30px rgba(72, 187, 120, 0.8);
+  }
+}
+
+@keyframes failPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 8px 24px rgba(229, 62, 62, 0.4),
+      0 0 20px rgba(229, 62, 62, 0.6);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 12px 32px rgba(229, 62, 62, 0.6),
+      0 0 30px rgba(229, 62, 62, 0.8);
+  }
+}
+
+/* Responsive adjustments for icons */
+@media screen and (orientation: landscape) {
+  .proof-status-success,
+  .proof-status-fail {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 390px) {
+  .proof-status-success,
+  .proof-status-fail {
+    width: 55px;
+    height: 55px;
+    font-size: 30px;
+  }
+}
+
+/* Status Lights */
+.status-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 16px 0;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff9a47;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+  transition: all 0.3s ease;
+}
+.status-light.green {
+  background: #2ed573;
+  box-shadow: 0 0 20px rgba(46, 213, 115, 0.6);
+}
+.status-light.blue {
+  background: #2ea0d5;
+  box-shadow: 0 0 20px rgba(46, 113, 213, 0.6);
+}
+
+.status-label {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+/* Input Fields */
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  margin: 8px 0;
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 12px 0;
+  box-shadow: 
+    0 8px 24px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.btn-primary:hover, .btn-primary.active {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 32px rgba(102, 126, 234, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #764ba2 0%,  #667eea 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 12px 0;
+  box-shadow: 
+    0 8px 24px rgba(175, 102, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.btn-secondary:hover, .btn-psecondary.active {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 32px rgba(186, 102, 234, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Portfolio Display */
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cash-amount {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.cash-currency {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.action-btn {
+  flex: 1;
+  max-width: 80px;
+  height: 60px;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.receive { 
+  background: linear-gradient(135deg, #2ed573, #1e90ff);
+}
+
+.action-btn.deposit { 
+  background: linear-gradient(135deg, #57606f, #747d8c);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.action-btn.pay { 
+  background: linear-gradient(135deg, #ff6b6b, #ee5253);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-btn.pay.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.action-btn:not(.deposit):not(.pay:not(.active)):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Crypto Selector */
+.crypto-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.crypto-btn {
+  padding: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crypto-btn.selected {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.15);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.crypto-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.crypto-name {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.crypto-balance {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.crypto-value {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+/* Transaction Page */
+.tx-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tx-crypto-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.tx-details {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 4px 0;
+  word-break: break-all;
+}
+
+.tx-balance {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 12px 0 4px 0;
+}
+
+.tx-cash-value-small {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.input-with-unit {
+  position: relative;
+  margin: 12px 0;
+}
+
+.input-unit {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+/* Transaction Buttons */
+.tx-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.tx-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tx-btn.gas { 
+  background: linear-gradient(135deg, #3742fa, #2f3542);
+}
+
+.tx-btn.sign { 
+  background: linear-gradient(135deg, #ff9ff3, #f368e0);
+}
+
+.tx-btn.send { 
+  background: linear-gradient(135deg, #ff6b6b, #ee5253);
+}
+
+.tx-btn:hover, .tx-btn.active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.tx-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Gas Fields */
+.gas-fields {
+  display: none;
+  margin: 12px 0;
+}
+
+.gas-fields.show {
+  display: block;
+}
+
+.gas-field {
+  margin: 8px 0;
+}
+
+.gas-field label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+}
+
+.gas-fields .input-field {
+  margin: 4px 0;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+/* Console Logs - Responsive Heights */
+.console-log {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  font-size: 11px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Default height for portrait */
+  max-height: 300px;
+  min-height: 200px;
+}
+
+/* Landscape - Shorter console */
+@media screen and (orientation: landscape) {
+  .console-log {
+    max-height: 120px;
+    min-height: 80px;
+  }
+}
+
+/* Portrait - Longer console */
+@media screen and (orientation: portrait) {
+  .console-log {
+    max-height: 400px;
+    min-height: 300px;
+  }
+}
+
+.log-entry {
+  margin: 4px 0;
+  padding: 6px;
+  border-left: 3px solid #667eea;
+  padding-left: 10px;
+  border-radius: 4px;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* Proof Details */
+.proof-details {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Default height for portrait */
+  max-height: 250px;
+  min-height: 150px;
+  overflow-y: auto;
+}
+
+/* Landscape - Shorter proof details */
+@media screen and (orientation: landscape) {
+  .proof-details {
+    max-height: 120px;
+    min-height: 80px;
+  }
+}
+
+/* Portrait - Longer proof details */
+@media screen and (orientation: portrait) {
+  .proof-details {
+    max-height: 400px;
+    min-height: 250px;
+  }
+}
+
+.proof-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  font-size: 12px;
+}
+
+.proof-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+}
+
+.proof-value {
+  color: #ffffff;
+  flex: 2;
+  word-break: break-all;
+}
+
+/* Blockchain Console - Responsive Heights */
+.blockchain-console {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  overflow-y: auto;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Default height for portrait */
+  max-height: 350px;
+  min-height: 250px;
+}
+
+/* Landscape - Shorter blockchain console */
+@media screen and (orientation: landscape) {
+  .blockchain-console {
+    max-height: 150px;
+    min-height: 100px;
+  }
+}
+
+/* Portrait - Longer blockchain console */
+@media screen and (orientation: portrait) {
+  .blockchain-console {
+    max-height: 450px;
+    min-height: 350px;
+  }
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 24px;
+  border-radius: 20px;
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal h3 {
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  position: fixed;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  z-index: 998;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.scroll-down { bottom: 20px; }
+.scroll-up { bottom: 70px; }
+
+/* Reload Button */
+.reload-btn {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 12px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.reload-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.reload-indicator {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* Home Indicator - Only in Landscape */
+.home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2.5px;
+  display: none;
+}
+
+@media screen and (orientation: landscape) {
+  .home-indicator {
+    display: block;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 390px) {
+  .device-frame {
+    width: calc(100vw - 16px);
+    height: calc(100vh - 16px);
+    border-radius: 32px;
+    padding: 8px;
+  }
+  
+  .screen {
+    border-radius: 24px;
+  }
+  
+  .section {
+    padding: 16px;
+    margin: 6px 0;
+  }
+  
+  .cash-amount { 
+    font-size: 28px; 
+  }
+  
+  .tx-crypto-name { 
+    font-size: 18px; 
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .status-bar {
+    color: #ffffff;
+  }
+}
+
+/* Add device frame to body - Only in Landscape */
+@media screen and (orientation: landscape) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    z-index: -1;
+  }
+}
+
+/* Ensure proper container structure */
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Add home indicator - Only in Landscape */
+@media screen and (orientation: landscape) {
+  .app-container::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2.5px;
+  }
+}
+
+/* Special styling for transaction details log entries */
+.log-entry.txdetails {
+  background: rgba(46, 213, 115, 0.1);
+  border-left-color: #2ed573;
+  font-size: 10px;
+  line-height: 1.4;
+  margin: 6px 0;
+  padding: 8px;
+}
+
+/* Insufficient funds styling */
+.gas-field.insufficient-funds input {
+  border-color: #e53e3e;
+  background: rgba(229, 62, 62, 0.1);
+}
+
+/* Proof status icons */
+.proof-status-success {
+  color: #2ed573;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.proof-status-fail {
+  color: #e53e3e;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Portrait mode adjustments for better spacing */
+@media screen and (orientation: portrait) {
+  .page {
+    padding: 12px;
+  }
+  
+  .section {
+    margin: 6px 0;
+    padding: 16px;
+  }
+  
+  .top-buttons {
+    top: 12px;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-height: 600px) {
+  .console-log {
+    max-height: 150px;
+    min-height: 100px;
+  }
+  
+  .blockchain-console {
+    max-height: 150px;
+    min-height: 100px;
+  }
+  
+  .proof-details {
+    max-height: 120px;
+    min-height: 80px;
+  }
+}
+
+/* Link Button for KYC Portal */
+.link-button{
+  display: inline-block;
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #a742e1 0%, #3182ce 100%);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 16px rgba(66, 153, 225, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 12px 0;
+}
+.link-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+  box-shadow: 
+    0 8px 24px rgba(66, 153, 225, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  color: #ffffff;
+}
+.link-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 16px rgba(66, 153, 225, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.link-button:focus{
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(66, 153, 225, 0.3),
+    0 4px 16px rgba(66, 153, 225, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive adjustments for link button */
+@media screen and (orientation: landscape) {
+  .link-button {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 390px) {
+  .link-button {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
+
+/* Popup styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content h3 {
+  margin-top: 0;
+  color: #333333;
+}
+
+.popup-content pre {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 14px;
+  color: #333333;
+}
+
+.popup-content .btn-primary {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
