@@ -61,7 +61,7 @@
     
     <!-- Status Section -->
     <div class="section">
-      <div class="section-title">QUANTUM-SAFE STATUS</div>
+      <div class="section-title">OCTOPUS WALLET STATUS</div>
       <div class="status-container">
         <div class="status-item">
           <div class="status-light" id="blockchainLight"></div>
@@ -75,14 +75,14 @@
     </div>
 
     <!-- Login Section -->
-    <div class="section" style="background-color: rgb(20, 1, 19)">
-      <div style="text-align: center; margin: 12px; color: #4a5568; font-weight: 600;">
-        <div style="margin-top:24px; margin-bottom:5px; font-size: 16px;">Tap the HSM Keycard</div>
-        <div style="margin-bottom:5px; color: #a0aec0; font-size: 10px;">◀ ◀ ◀ OR ▶ ▶ ▶</div>
-        <div style="margin-bottom:24px; font-size: 16px;">Enter the Demo Passkey</div>
+    <div class="section">
+      <div style="text-align: center; margin: 12px; color: #6d5c4f; font-weight: 600;">
+        <div style="margin-top:24px; margin-bottom:5px; font-size: 16px;">Tap the keycard or use the demo passkey</div>
+        <div style="margin-bottom:5px; color: #ff8c3a; font-size: 10px;">Buy · Swap · Send · Receive · Bridge · Earn</div>
+        <div style="margin-bottom:24px; font-size: 16px;">Unlock the Octopus wallet shell</div>
       </div>
-      <input type="password" class="input-field" id="passkeyInput" placeholder="Enter One-Time [4321]" maxlength="10">
-      <button class="btn-primary" id="loginBtn">Access Quantum-Safe Wallet</button>
+      <input type="password" class="input-field" id="passkeyInput" placeholder="Enter one-time [4321]" maxlength="10">
+      <button class="btn-primary" id="loginBtn">Unlock Octopus Wallet</button>
     </div>
 
     <button class="scroll-btn scroll-down" id="scrollDown1" style="display:none;">↓</button>
@@ -90,31 +90,61 @@
 
   <!-- Balance Page -->
   <div class="page" id="balancePage">
-    <!-- Big Reload Button (replaces the static section) -->
-    <button class="reload-btn" id="reloadBalancesBtn">
-      <div class="section-title" id="portfolioTitle">Total Portfolio</div>
-      <div class="portfolio-header">
-        <div class="cash-amount" id="totalCashValue">$0.00</div>
-        <div class="cash-currency" id="selectedCurrency">Loading...</div>
+    <div class="home-shell">
+      <div class="hero-topbar">
+        <div class="hero-account">
+          <div class="hero-avatar" aria-hidden="true">Q</div>
+          <div>
+            <div class="hero-account-name" id="walletAccountLabel">Account 1</div>
+            <div class="hero-account-subtitle" id="walletAccountSubtitle">Quantumatter Octopus Wallet</div>
+          </div>
+        </div>
+      <div class="hero-actions">
+          <button class="round-btn" id="homeScanBtn" aria-label="Scan QR">▣</button>
+          <button class="round-btn" id="homeSetupBtn" aria-label="Wallet settings">⚙</button>
+        </div>
       </div>
-      <div class="reload-indicator">↻ Tap to Reload Balances</div>
-    </button>
 
-    <!-- Action Buttons - NO SECTION BOX -->
-    <div class="action-buttons">
-      <button class="action-btn receive" id="receiveBtn">
-        <span>📥</span>
-        <span>Receive</span>
+      <label class="wallet-search" for="walletSearch">
+        <span>⌕</span>
+        <input type="search" id="walletSearch" placeholder="Search tokens, swaps, or dapps">
+      </label>
+
+      <button class="reload-btn hero-card" id="reloadBalancesBtn">
+        <div class="section-title" id="portfolioTitle">Total Portfolio</div>
+        <div class="portfolio-header">
+          <div class="cash-amount" id="totalCashValue">$0.00</div>
+          <div class="cash-currency" id="selectedCurrency">Loading...</div>
+        </div>
+        <div class="reload-indicator">↻ Tap to Reload Balances</div>
       </button>
-      <button class="action-btn deposit" id="depositBtn" disabled>
-        <span>💰</span>
-        <span>Deposit</span>
-      </button>
-      <button class="action-btn pay" id="payBtn">
-        <span>💸</span>
-        <span>Pay</span>
-      </button>
-    </div>
+
+      <div class="wallet-actions-grid">
+        <button class="wallet-action-card buy" id="depositBtn">
+          <span class="wallet-action-icon">💳</span>
+          <span>Buy</span>
+        </button>
+        <button class="wallet-action-card swap" id="swapBtn">
+          <span class="wallet-action-icon">⇄</span>
+          <span>Swap</span>
+        </button>
+        <button class="wallet-action-card send" id="payBtn">
+          <span class="wallet-action-icon">➤</span>
+          <span>Send</span>
+        </button>
+        <button class="wallet-action-card receive" id="receiveBtn">
+          <span class="wallet-action-icon">▣</span>
+          <span>Receive</span>
+        </button>
+        <button class="wallet-action-card bridge" id="bridgeBtn">
+          <span class="wallet-action-icon">⟷</span>
+          <span>Bridge</span>
+        </button>
+        <button class="wallet-action-card earn" id="earnBtn">
+          <span class="wallet-action-icon">✦</span>
+          <span>Earn</span>
+        </button>
+      </div>
 
     <div class="section">
       <div class="section-title">CURRENT ACCOUNTS</div>
@@ -130,15 +160,36 @@
       </div>
     </div>
 
+    <div class="section octopus-banner">
+      <div class="octopus-banner-kicker">Octopus Wallet Mode</div>
+      <h3>Buy, swap, bridge, and earn from one bright home screen.</h3>
+      <p>MetaMask-style actions, Binance-style market discovery, and an Octopus Limited palette.</p>
+    </div>
+
     <button class="scroll-btn scroll-up" id="scrollUp2">↑</button>
     <button class="scroll-btn scroll-down" id="scrollDown2" style="display:none;">↓</button>
+    </div>
   </div>
 
   <!-- Transaction Page -->
   <div class="page" id="transactionPage">
+    <div class="section trade-shell">
+      <div class="section-title">TRADE & TRANSFER</div>
+      <div class="trade-tabs">
+        <div class="trade-tab active">Exchange</div>
+        <div class="trade-tab">Wallet</div>
+      </div>
+      <div class="trade-banner">
+        <div>
+          <div class="trade-banner-label">One home for Web3</div>
+          <div class="trade-banner-copy">Send, swap, bridge, and route assets with wallet-style controls.</div>
+        </div>
+        <div class="trade-banner-mark">◎</div>
+      </div>
+    </div>
+
     <div class="section" id="txSectionHeader">
       <div class="tx-header" id="txHeader">
-        <!-- Swap: Balance big, Cash value small -->
         <div class="tx-crypto-name" id="selectedCryptoName">Select Cryptocurrency</div>
         <div class="tx-details" id="walletAddress">Wallet Address</div>
         <div class="tx-balance" id="walletBalance">Balance</div>
@@ -156,21 +207,25 @@
     </div>
 
     <div class="tx-buttons">
-      <!-- button class="tx-btn gas" id="gasBtn">GAS></button>
-      <button class="tx-btn sign" id="signBtn">SIGN></button>
-      <button class="tx-btn send" id="sendBtn">SEND></button -->
       <button class="tx-btn gas" id="gasBtn">
         <span>⛽</span>
-        <span>Gas</span>
-      </button>  
+        <span>Quote</span>
+      </button>
       <button class="tx-btn sign" id="signBtn">
         <span>✍🏻</span>
         <span>Sign</span>
-      </button>  
+      </button>
       <button class="tx-btn send" id="sendBtn">
         <span>💸</span>
         <span>Send</span>
-      </button>  
+      </button>
+    </div>
+
+    <div class="wallet-tools-grid">
+      <button class="wallet-tool-card" id="tradeSwapBtn">Swap Mode</button>
+      <button class="wallet-tool-card" id="tradeBridgeBtn">Bridge Mode</button>
+      <button class="wallet-tool-card" id="tradeReceiveBtn">Receive QR</button>
+      <button class="wallet-tool-card subtle" id="tradeBuyBtn">Buy Crypto</button>
     </div>
 
     <div class="gas-fields" id="gasFields">
@@ -186,15 +241,21 @@
   <!-- Proof Page -->
   <div class="page" id="proofPage">
     <div class="section">
-      <div class="section-title">Transaction Details</div>
-      <div id="proofStatusIcon" style="text-align:center; margin-bottom: 10px;"></div>
+      <div class="section-title">ACTIVITY & DISCOVERY</div>
+      <div class="activity-tabs">
+        <div class="activity-tab active">Transactions</div>
+        <div class="activity-tab">Discover</div>
+        <div class="activity-tab">NFTs</div>
+      </div>
+      <div id="proofStatusIcon" style="text-align:center; margin: 10px 0 14px;"></div>
+      <button class="btn-primary" id="fetchTransactionsBtn">Fetch Past Transactions</button>
       <div class="proof-details" id="proofDetails">
         <!-- Populated by JavaScript -->
       </div>
     </div>
 
     <div class="section">
-      <button class="btn-primary" id="listenBtn">Listen to Quantum Proof</button>  
+      <button class="btn-primary" id="listenBtn">Listen to Quantum Proof</button>
     </div>
 
     <div class="blockchain-console" id="blockchainConsole">
@@ -203,6 +264,29 @@
 
     <button class="scroll-btn scroll-up" id="scrollUp4">↑</button>
   </div>
+
+  <nav class="wallet-nav" id="walletNav" aria-label="Wallet navigation">
+    <button class="wallet-nav-item active" data-page="0">
+      <span>◌</span>
+      <span>Profile</span>
+    </button>
+    <button class="wallet-nav-item" data-page="1">
+      <span>⌂</span>
+      <span>Home</span>
+    </button>
+    <button class="wallet-nav-item nav-center" id="topUpNavBtn">
+      <span>＋</span>
+      <span>Top Up</span>
+    </button>
+    <button class="wallet-nav-item" data-page="2">
+      <span>⇄</span>
+      <span>Trade</span>
+    </button>
+    <button class="wallet-nav-item" data-page="3">
+      <span>◔</span>
+      <span>Activity</span>
+    </button>
+  </nav>
 
   <!-- Modals -->
   <div class="modal" id="scanModal">
@@ -250,10 +334,26 @@
     <div class="modal-content">
       <h3>Two-Factor Authentication</h3>
       <p>You will receive a one-time passkey through your registered email or SMS.</p>
+      <input type="text" class="input-field" id="otpInput" placeholder="Enter one-time passkey">
       <div class="modal-buttons" style="margin-top: 12px;">
         <button class="btn-primary" id="sendPasskeyBtn">Request one-time passkey</button>
         <button class="btn-primary" id="cancelPasskeyBtn">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <div class="modal" id="walletActionModal">
+    <div class="modal-content wallet-action-modal">
+      <div class="wallet-action-head">
+        <div class="wallet-action-badge" id="walletActionBadge">◎</div>
+        <div>
+          <h3 id="walletActionTitle">Wallet Action</h3>
+          <p id="walletActionSubtitle">Select an action to continue.</p>
+        </div>
+      </div>
+      <div id="walletActionBody"></div>
+      <button class="btn-primary" id="walletActionConfirmBtn">Continue</button>
+      <button class="btn-secondary" id="walletActionCloseBtn">Close</button>
     </div>
   </div>
 
@@ -344,6 +444,13 @@
         page.classList.toggle('active', idx === pageIndex);
       });
       currentPage = pageIndex;
+
+      const currentPageEl = pages[pageIndex];
+      if (currentPageEl) currentPageEl.scrollTop = 0;
+
+      document.querySelectorAll('.wallet-nav-item[data-page]').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.page) === pageIndex);
+      });
       
       // Show/hide scroll buttons
       document.querySelectorAll('.scroll-btn').forEach(btn => btn.style.display = 'none');
@@ -353,6 +460,17 @@
       if (pageIndex < 3) {
         const downBtn = document.getElementById(`scrollDown${pageIndex + 1}`);
         if (downBtn) downBtn.style.display = pageIndex === 0 && !walletPin ? 'none' : 'flex';
+      }
+
+      const search = document.getElementById('walletSearch');
+      if (search) {
+        const placeholders = {
+          0: 'Search profile, setup, and security',
+          1: 'Search tokens, swaps, or dapps',
+          2: 'Search swap pairs or recipient addresses',
+          3: 'Search activity, tokens, or explorers'
+        };
+        search.placeholder = placeholders[pageIndex] || 'Search wallet';
       }
     }
 
@@ -374,6 +492,130 @@
         return str.slice(0, 12) + '...' + str.slice(-10);
       }
       return str;
+    }
+
+    function updateAccountChrome() {
+      const label = document.getElementById('walletAccountLabel');
+      const subtitle = document.getElementById('walletAccountSubtitle');
+      if (label && userName) label.textContent = userName;
+      if (subtitle) {
+        subtitle.textContent = userDid ? `Slot ${walletSlot} · ${userDid}` : `Slot ${walletSlot}`;
+      }
+    }
+
+    function filterWalletAssets() {
+      const search = document.getElementById('walletSearch');
+      if (!search) return;
+      const query = search.value.trim().toLowerCase();
+      document.querySelectorAll('.crypto-btn').forEach(btn => {
+        const haystack = btn.textContent.toLowerCase();
+        btn.style.display = !query || haystack.includes(query) ? 'flex' : 'none';
+      });
+    }
+
+    function closeWalletActionModal() {
+      const modal = document.getElementById('walletActionModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function openWalletAction(action) {
+      const modal = document.getElementById('walletActionModal');
+      const title = document.getElementById('walletActionTitle');
+      const subtitle = document.getElementById('walletActionSubtitle');
+      const body = document.getElementById('walletActionBody');
+      const badge = document.getElementById('walletActionBadge');
+      const confirmBtn = document.getElementById('walletActionConfirmBtn');
+
+      if (!modal || !title || !subtitle || !body || !badge || !confirmBtn) return;
+
+      const actionMap = {
+        buy: {
+          badge: '💳',
+          title: 'Top Up Octopus',
+          subtitle: 'Buy crypto with the same bright, app-like flow used by retail wallets.',
+          body: `
+            <div class="wallet-action-pills">
+              <button type="button" class="wallet-choice is-active" data-choice="500">500</button>
+              <button type="button" class="wallet-choice" data-choice="1000">1,000</button>
+              <button type="button" class="wallet-choice" data-choice="1800">1,800</button>
+            </div>
+            <div class="wallet-action-note">Supports Apple Pay, cards, and provider-led checkout. This demo logs the request and keeps the flow local.</div>
+          `,
+          confirm: 'Top Up'
+        },
+        swap: {
+          badge: '⇄',
+          title: 'Swap Tokens',
+          subtitle: 'MetaMask-style exchange flow with Binance-style market visibility.',
+          body: `
+            <div class="wallet-action-summary">
+              <div><span>From</span><strong>${selectedCrypto ? CRYPTOS[selectedCrypto].symbol : 'USDCq'}</strong></div>
+              <div><span>To</span><strong>ETHq</strong></div>
+            </div>
+            <div class="wallet-action-note">Quotes, routes, and slippage controls can be wired to a DEX provider later.</div>
+          `,
+          confirm: 'Review Swap'
+        },
+        bridge: {
+          badge: '⟷',
+          title: 'Bridge Assets',
+          subtitle: 'Move assets across chains without leaving the Octopus shell.',
+          body: `
+            <div class="wallet-action-pills">
+              <button type="button" class="wallet-choice is-active" data-choice="ethereum">Ethereum</button>
+              <button type="button" class="wallet-choice" data-choice="bnb">BNB Chain</button>
+              <button type="button" class="wallet-choice" data-choice="solana">Solana</button>
+            </div>
+            <div class="wallet-action-note">This mirrors the bridge-first flow in MetaMask and the network router style in Binance Wallet.</div>
+          `,
+          confirm: 'Bridge Now'
+        },
+        earn: {
+          badge: '✦',
+          title: 'Earn Rewards',
+          subtitle: 'Surface staking and yield ideas in a wallet-native card.',
+          body: `
+            <div class="wallet-action-summary">
+              <div><span>ETH staking</span><strong>Up to 2.1% APY</strong></div>
+              <div><span>BNB-style pools</span><strong>Flexible</strong></div>
+            </div>
+            <div class="wallet-action-note">Use this as the shell for staking, pools, or yield routing when you connect live providers.</div>
+          `,
+          confirm: 'Explore Earn'
+        }
+      };
+
+      const config = actionMap[action] || actionMap.buy;
+      badge.textContent = config.badge;
+      title.textContent = config.title;
+      subtitle.textContent = config.subtitle;
+      body.innerHTML = config.body;
+      confirmBtn.textContent = config.confirm;
+
+      confirmBtn.onclick = () => {
+        if (action === 'buy') {
+          logTransaction('Top up flow opened from the Octopus-style home screen.');
+        } else if (action === 'swap') {
+          logTransaction('Swap review opened with MetaMask-style routing language.');
+          showPage(2);
+        } else if (action === 'bridge') {
+          logTransaction('Bridge route opened from the wallet shell.');
+          showPage(2);
+        } else if (action === 'earn') {
+          logTransaction('Earn opportunities opened.');
+          showPage(3);
+        }
+        closeWalletActionModal();
+      };
+
+      body.querySelectorAll('.wallet-choice').forEach(choice => {
+        choice.addEventListener('click', () => {
+          body.querySelectorAll('.wallet-choice').forEach(btn => btn.classList.remove('is-active'));
+          choice.classList.add('is-active');
+        });
+      });
+
+      modal.style.display = 'flex';
     }
 
     function logTransaction(message) {
@@ -910,6 +1152,7 @@
 
       // Set senderAddr to besu address for main wallet display
       senderAddr = cryptoAddresses.besu || cryptoAddresses.usdcq;
+      updateAccountChrome();
 
       // Update the portfolio display
       document.getElementById('totalCashValue').textContent = `$${totalCashValue.toFixed(2)}`;
@@ -926,6 +1169,7 @@
       
       // Update crypto selector with groups
       updateCryptoSelector();
+      filterWalletAssets();
       
       // Auto-select USDCq if available
       if (cryptoBalances.usdcq && cryptoBalances.usdcq.address !== 'Not loaded') {
@@ -1705,6 +1949,8 @@
       document.getElementById('qrModal').style.display = 'none';
     }
 
+    document.getElementById('walletActionCloseBtn')?.addEventListener('click', closeWalletActionModal);
+
     async function reloadAllBalances() {
       const reloadBtn = document.getElementById('reloadBalancesBtn');
       const reloadIndicator = reloadBtn.querySelector('.reload-indicator');
@@ -1766,6 +2012,36 @@
     // Top button event listeners
     document.getElementById('scanBtn').addEventListener('click', openScanModal);
     document.getElementById('setupBtn').addEventListener('click', openSetupModal);
+    document.getElementById('homeScanBtn')?.addEventListener('click', openScanModal);
+    document.getElementById('homeSetupBtn')?.addEventListener('click', openSetupModal);
+    document.getElementById('topUpNavBtn')?.addEventListener('click', () => openWalletAction('buy'));
+
+    document.querySelectorAll('.wallet-nav-item[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => showPage(Number(btn.dataset.page)));
+    });
+
+    document.getElementById('walletSearch')?.addEventListener('input', filterWalletAssets);
+
+    document.getElementById('depositBtn').addEventListener('click', () => openWalletAction('buy'));
+    document.getElementById('swapBtn').addEventListener('click', () => openWalletAction('swap'));
+    document.getElementById('bridgeBtn').addEventListener('click', () => openWalletAction('bridge'));
+    document.getElementById('earnBtn').addEventListener('click', () => openWalletAction('earn'));
+    document.getElementById('tradeSwapBtn').addEventListener('click', () => openWalletAction('swap'));
+    document.getElementById('tradeBridgeBtn').addEventListener('click', () => openWalletAction('bridge'));
+    document.getElementById('tradeBuyBtn').addEventListener('click', () => openWalletAction('buy'));
+    document.getElementById('tradeReceiveBtn').addEventListener('click', () => {
+      if (!selectedCrypto) {
+        alert('Please select a cryptocurrency first');
+        return;
+      }
+      const balance = cryptoBalances[selectedCrypto];
+      if (!balance || !balance.address || balance.address === 'Not loaded') {
+        alert('Address not loaded for selected cryptocurrency');
+        return;
+      }
+      const crypto = CRYPTOS[selectedCrypto];
+      openQrModal(balance.address, crypto.name);
+    });
 
     // File input for scanning
     document.getElementById('fileInput').addEventListener('change', function(e) {
@@ -1844,6 +2120,7 @@
         
         // Hide login modal and proceed
         document.getElementById('loginModal').style.display = 'none';
+        updateAccountChrome();
         
         // Show scroll down button and auto scroll
         document.getElementById('scrollDown1').style.display = 'flex';
@@ -2095,6 +2372,7 @@
 
       // Hide login modal and proceed
       document.getElementById('loginModal').style.display = 'none';
+      updateAccountChrome();
       console.log(`Login successful: User=${userName}, Slot=${walletSlot}, DID=${userDid}`);
     });
 
@@ -2137,9 +2415,11 @@
     });
 
     // Add the new button Fetch Past Transactions
-    document.getElementById('proofPage').querySelector('.section').insertAdjacentHTML('beforeend', `
-      <button class="btn-primary" id="fetchTransactionsBtn">Fetch Past Transactions</button>
-    `);
+    if (!document.getElementById('fetchTransactionsBtn')) {
+      document.getElementById('proofPage').querySelector('.section').insertAdjacentHTML('beforeend', `
+        <button class="btn-primary" id="fetchTransactionsBtn">Fetch Past Transactions</button>
+      `);
+    }
 
     const fetchBesuTransactions = async (address) => {
       try {
